@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency Converter APP</title>
+    <style>
+        body {
+            background: #d3d3d3;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            width: 400px;
+            margin: 40px auto;
+            background: #cfcfcf;
+            padding: 20px;
+            border-radius: 5px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .row label {
+            width: 150px;
+            font-size: 14px;
+        }
+
+        .row input,
+        .row select {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: #eee;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #2f80ed;
+            color: white;
+            border: none;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .result-label {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .result-box {
+            background: black;
+            color: white;
+            padding: 20px;
+            margin-top: 5px;
+            height: 60px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Currency Converter APP</h2>
+
+    <div class="row">
+        <label>Enter Amount IN FRW</label>
+        <input type="number" id="amount">
+    </div>
+
+    <div class="row">
+        <label>Select Currency</label>
+        <select id="currency">
+            <option value="USD">USD</option>
+            <option value="EUR">EURO</option>
+        </select>
+    </div>
+
+    <div class="row">
+        <label>Rate</label>
+        <input type="number" id="rate">
+    </div>
+
+    <button onclick="convert()">CONVERT</button>
+
+    <div class="result-label">Result</div>
+    <div class="result-box" id="result">Result Here ....</div>
+</div>
+
+<script>
+function convert() {
+    let amount = parseFloat(document.getElementById("amount").value);
+    let rate = parseFloat(document.getElementById("rate").value);
+    let currency = document.getElementById("currency").value;
+
+    if (isNaN(amount) || isNaN(rate) || rate <= 0) {
+        document.getElementById("result").innerHTML = "Invalid input";
+        return;
+    }
+
+    let result = amount / rate;
+
+    if (currency === "USD") {
+        document.getElementById("result").innerHTML = result.toFixed(2) + " USD";
+    } else {
+        document.getElementById("result").innerHTML = result.toFixed(2) + " EURO";
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:#eee;
+}
+
+/* TOP BAR */
+.topbar{
+    background:blue;
+    padding:10px;
+}
+
+.topbar input{
+    padding:5px;
+}
+
+/* LAYOUT */
+.container{
+    display:flex;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:200px;
+    height:100vh;
+    background:yellow;
+    padding:20px;
+}
+
+.sidebar a{
+    display:block;
+    margin:10px 0;
+    color:black;
+    text-decoration:none;
+}
+
+/* CONTENT */
+.content{
+    flex:1;
+    padding:20px;
+}
+
+h2{
+    text-align:center;
+}
+
+/* IMAGE POSITION (IMPORTANT) */
+.image-box{
+    margin-left:20px;
+}
+
+.image-box img{
+    width:300px;
+}
+
+/* TEXT */
+.text{
+    margin-top:20px;
+    max-width:700px;
+}
+</style>
+
+<script>
+function showPage(id){
+    document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+    document.getElementById(id).style.display="block";
+}
+</script>
+
+</head>
+
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+    <input type="text" placeholder="Search...">
+</div>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <a href="#" onclick="showPage('home')">• Home</a>
+    <a href="#" onclick="showPage('about')">• About us</a>
+    <a href="#" onclick="showPage('contact')">• Contact us</a>
+    <a href="#" onclick="showPage('doc')">• Doc</a>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- HOME -->
+<div id="home" class="page">
+    <h2>My Web site</h2>
+
+    <!-- IMAGE (RIGHT PLACE) -->
+    <div class="image-box">
+        <img src="image.png" alt="project image">
+    </div>
+
+    <!-- TEXT -->
+    <div class="text">
+        <p>
+        As the software industry moves into the second decade of the 21st century,
+        software quality is increasingly becoming essential to all businesses and
+        knowledge of software testing is becoming necessary for all software engineers.
+        The course focus on the theoretical concepts of Software Testing with high
+        emphasis on inclusion of the practical context which is equally needed to
+        prepare the learner for the demands of this field in the workplace.
+        </p>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="page" style="display:none;">
+    <h2>About Us</h2>
+    <p>This is About Us page.</p>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="page" style="display:none;">
+    <h2>Contact Us</h2>
+
+    <p>Email:
+    <a href="mailto:sindayigayasamuel38@gmail.com">
+    sindayigayasamuel38@gmail.com
+    </a></p>
+
+    <p>Phone:
+    <a href="tel:+250799318113">
+    +250799318113
+    </a></p>
+
+    <p>WhatsApp:
+    <a href="https://wa.me/250799318113" target="_blank">
+    Chat on WhatsApp
+    </a></p>
+</div>
+
+<!-- DOC -->
+<div id="doc" class="page" style="display:none;">
+    <h2>Doc</h2>
+    <p>This is documentation page.</p>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>

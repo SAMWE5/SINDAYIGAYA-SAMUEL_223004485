@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Place Your Order - My Hotel</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .order-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .order-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .order-header h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .order-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .order-form {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group label .required {
+            color: #ff6b35;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .menu-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .menu-card {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-card:hover {
+            border-color: #ff6b35;
+            transform: translateY(-3px);
+        }
+
+        .menu-card.selected {
+            border-color: #ff6b35;
+            background: #fff5f0;
+        }
+
+        .menu-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+
+        .menu-price {
+            color: #ff6b35;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #ff6b35;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: #e55a2b;
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .order-summary h3 {
+            margin: 0 0 15px 0;
+            color: #333;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0 0 0;
+            margin-top: 10px;
+            font-weight: 700;
+            font-size: 18px;
+            color: #ff6b35;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+            
+            .menu-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-form {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h2 class="logo">My Hotel</h2>
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="menu.html">Menu</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="order.html">Order</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</div>
+
+<div class="order-container">
+    <div class="order-header">
+        <h1>Place Your Order</h1>
+        <p>Delicious meals delivered to your doorstep</p>
+    </div>
+
+    <form action="insert_order.php" method="POST" class="order-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label>Full Name <span class="required">*</span></label>
+                <input type="text" name="fullname" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address <span class="required">*</span></label>
+                <input type="email" name="email" placeholder="your@email.com" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Phone Number <span class="required">*</span></label>
+                <input type="tel" name="phone" placeholder="+250 7XX XXX XXX" required>
+            </div>
+
+            <div class="form-group">
+                <label>Delivery Date <span class="required">*</span></label>
+                <input type="date" name="date" id="date" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Select Your Meal <span class="required">*</span></label>
+            <div class="menu-options">
+                <div class="menu-card" onclick="selectMenu(this, 'Fish', 15.99)">
+                    <div class="menu-name">Grilled Fish</div>
+                    <div class="menu-price">$15.99</div>
+                    <input type="radio" name="menu" value="Fish" style="display: none;">
+                </div>
+
+                <div class="menu-card" onclick="selectMenu(this, 'Drink', 3.99)">
+                    <div class="menu-name">Soft Drinks</div>
+                    <div class="menu-price">$3.99</div>
+                    <input type="radio" name="menu" value="Drink" style="display: none;">
+                </div>
+
+                <div class="menu-card" onclick="selectMenu(this, 'Fresh Juice', 5.99)">
+                    <div class="menu-name">Fresh Juice</div>
+                    <div class="menu-price">$5.99</div>
+                    <input type="radio" name="menu" value="Fresh Juice" style="display: none;">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Delivery Address <span class="required">*</span></label>
+            <textarea name="address" rows="3" placeholder="Enter your complete delivery address" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Special Instructions (Optional)</label>
+            <textarea name="instructions" rows="2" placeholder="Any special requests? (allergies, extra sauce, etc.)"></textarea>
+        </div>
+
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <div class="summary-item">
+                <span>Selected Meal:</span>
+                <span id="summary-meal">Not selected</span>
+            </div>
+            <div class="summary-item">
+                <span>Delivery Date:</span>
+                <span id="summary-date">Not selected</span>
+            </div>
+            <div class="summary-total">
+                <span>Total Amount:</span>
+                <span id="summary-total">$0.00</span>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Place Order Now</button>
+    </form>
+</div>
+
+<div class="footer">
+    <p>© 2026 My Hotel | All Rights Reserved</p>
+</div>
+
+<script>
+    // Set minimum date to today
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('date').min = today;
+    
+    // Set default date to tomorrow
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('date').value = tomorrow.toISOString().split('T')[0];
+    
+    let currentPrice = 0;
+    
+    function selectMenu(card, menuName, price) {
+        // Remove selected class from all cards
+        document.querySelectorAll('.menu-card').forEach(c => {
+            c.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked card
+        card.classList.add('selected');
+        
+        // Select the radio button
+        const radio = card.querySelector('input[type="radio"]');
+        radio.checked = true;
+        
+        // Update summary
+        currentPrice = price;
+        document.getElementById('summary-meal').innerHTML = menuName;
+        document.getElementById('summary-total').innerHTML = '$' + price.toFixed(2);
+    }
+    
+    // Update delivery date in summary
+    document.getElementById('date').addEventListener('change', function() {
+        const dateInput = this.value;
+        if (dateInput) {
+            const formattedDate = new Date(dateInput).toLocaleDateString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('summary-date').innerHTML = formattedDate;
+        }
+    });
+    
+    // Trigger date update on page load
+    const event = new Event('change');
+    document.getElementById('date').dispatchEvent(event);
+</script>
+
+</body>
+</html>

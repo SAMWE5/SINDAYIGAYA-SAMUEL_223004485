@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Us - Hotel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="navbar">
+    <h2 class="logo">My Hotel</h2>
+    <div class="menu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="menu.html">Menu</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="order.html">Order</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</div>
+
+<div class="content">
+    <h1>Contact Us</h1>
+
+    <form action="insert_contact.php" method="POST" class="form">
+
+        <input type="text" name="fullname" placeholder="Full Name" required><br><br>
+
+        <input type="email" name="email" placeholder="Email" required><br><br>
+
+        <input type="text" name="phone" placeholder="Phone" required><br><br>
+
+        <input type="text" name="location" placeholder="Location" required><br><br>
+
+        <textarea name="message" placeholder="Your Message" required></textarea><br><br>
+
+        <button type="submit">Send Message</button>
+
+    </form>
+</div>
+
+<div class="footer">
+    <p>© 2026 My Hotel</p>
+</div>
+
+</body>
+</html>
